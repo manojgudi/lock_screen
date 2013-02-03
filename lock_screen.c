@@ -1,6 +1,10 @@
+/*
+This program is specifically for aakash device where lock_screen_button has file-descriptor event /dev/input/event0 and keycode 116
+Author: Manoj G <manoj.p.gudi@gmail.com> 
+Reference: http://www.thelinuxdaily.com/2010/05/grab-raw-keyboard-input-from-event-device-node-devinputevent/
+*/
 
 #include "lock_screen.h"
-
 
 void perror_exit(char *error)
 {
@@ -10,7 +14,8 @@ void perror_exit(char *error)
 
 int main(int argc, char *argv[])
 {
-  int TOGGLE_SWITCH; 
+
+  extern int TOGGLE_SWITCH;
   struct input_event ev;
   int fd, size = sizeof (struct input_event);
   char name[256] = "Unknown";
@@ -40,25 +45,22 @@ int main(int argc, char *argv[])
   //Print Device Name
   ioctl (fd, EVIOCGNAME (sizeof (name)), name);
   printf ("Reading From : %s (%s)\n", device, name);
+
+
   while (1){
     if ((read (fd, &ev, size)) < size) {
-      perror_exit ("read()");      
-    }  
+      perror_exit ("read()");
+    }
     
     if (ev.type == 1 && ev.value == 1 ){ // Only read the key press event
       printf ("Code[%d]\n", (ev.code));
       
       	if(ev.code == 116){    // Change this value if the key-value is not 116
-      		TOGGLE_SWITCH+=1;
-      		
-      		if ( TOGGLE_SWITCH%2 == 0){
-      			turn_screen_off();}
-      		
-      		else {
-      			turn_screen_on();}
+      		TOGGLE_SWITCH = ~(TOGGLE_SWITCH); // TOGGLING
+
+      	int status =  (TOGGLE_SWITCH%2 == 0) ? turn_screen_off() : turn_screen_on();
       	}
-      
-    } 
+    }
   }
   return 0;
 }

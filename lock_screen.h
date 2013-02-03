@@ -9,8 +9,8 @@
 
 int TOGGLE_SWITCH = 1;
 
+
 int turn_screen_off(){
-	
 	int status = system("fbset -xres 0");
 	return status;
 }
