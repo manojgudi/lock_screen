@@ -4,8 +4,7 @@ lock_screen
 event handling of lock-screen button (for aakash)
 
 
-Installing
-==========
+## Installing
 
 The code has to be natively compiled, so use this requires gcc installed.
 
@@ -16,24 +15,23 @@ $ ./install
 $ gcc lock_screen.h -o lock_screen.o
 
 
-Loading
-=======
+## Loading
 
 lock_screen.o has to be loaded with following parameter
 
 $ ./lock_screen.o /dev/input/event0
 
-where /dev/input/event0  is file descriptor of lock_screen button of aakash (it usually is event0, if its not, contact me)
+where */dev/input/event0*  is file descriptor of lock_screen button of aakash (it usually is event0, if its not, contact me)
 
-Thats it; it the button should toggle screen on or off. 
-NOTE: The backlight doesnt go off (yet).
+*Thats it* it the button should toggle screen on or off. 
+
+**NOTE: The backlight doesnt go off (yet).**
 
 
-Loading on boot
-===============
+## Loading on boot
 
 Put following line in rc.local before "exit0" 
 
-/path_to_lock_screen.o/lock_screen.o /dev/input/event0
+*/path_to_lock_screen.o/lock_screen.o   /dev/input/event0*
 
 
