@@ -3,5 +3,7 @@
 echo "Installing fbset package, requires root privileges.."
 sudo apt-get install fbset
 
-echo "Please compile lock_screen.c using gcc "
-echo "After compiling use this app as     ./a.out /dev/input/event0 "
+echo "Compiling lock_screen.c using gcc "
+gcc lock_screen.c -o lock_screen.o
+
+echo "After compiling use this app as     ./lock_screen.o /dev/input/event0"

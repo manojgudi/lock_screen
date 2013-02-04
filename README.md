@@ -12,7 +12,7 @@ The code has to be natively compiled, so use this requires gcc installed.
 $ ./install
 
 * Compile the lock_screen.c
-$ gcc lock_screen.h -o lock_screen.o
+> $ gcc lock_screen.c -o lock_screen.o
 
 
 ## Loading
