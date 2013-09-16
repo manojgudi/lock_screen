@@ -12,13 +12,19 @@ int TOGGLE_SWITCH = 1;
 
 int turn_screen_off(){
 	system("rmmod ft5x_ts"); // Change the touch screen module "ft5x_ts" with proper module if this doesnt work
+	system("rmmod ektf2k"); 	
+	system("rmmod gt811_ts"); 
+	
 	int status = system("fbset -xres 0");
 	return status;
 }
 
 
 int turn_screen_on(){
-	system("modprobe ft5x_ts")
+	system("modprobe ft5x_ts");
+	system("modprobe ektf2k");
+	system("modprobe gt811_ts");
+	
 	int status = system("fbset -xres 800");
 	return status;
 }
